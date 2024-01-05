@@ -1,0 +1,68 @@
+{
+    "3star": {
+        "train3": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946164870418522/temp.gif?ex=65aaecb1&is=659877b1&hm=5ad7367e7d584db716c4133b80ccbb5434f6d7221ee241a1e5b2ecee521ada88&",
+            "duration": 18.28
+        },
+        "train4": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946276845760563/temp.gif?ex=65aaeccc&is=659877cc&hm=8c479f955dbc7b070ba8b5d810821501e7399d3c0cad31197f2a6e98a0e94db2&",
+            "duration": 19.72
+        },
+        "train5": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946400351223929/temp.gif?ex=65aaece9&is=659877e9&hm=0e007a7b42f41747bbf8ac6141688737f148d6af612764e3364f8dfc61bb3bd3&",
+            "duration": 21.32
+        },
+        "static": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946410807640114/static.png?ex=65aaecec&is=659877ec&hm=36607500149baf353307319c04fbe527a434f11321a4309be71c5904017a428a&",
+            "duration": 0
+        },
+        "solo": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946426376880268/temp.gif?ex=65aaecef&is=659877ef&hm=9b220763e8438812905e239703f8306f4180c3570c1d50f5fe7a7a867adf1a67&",
+            "duration": 1.44
+        }
+    },
+    "4star": {
+        "train3": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946534149537832/temp.gif?ex=65aaed09&is=65987809&hm=e324e87db156455651658a0ae4efa42c3a67d46ea9a96f9c1097ee88ebb1976f&",
+            "duration": 18.36
+        },
+        "train4": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946654089851012/temp.gif?ex=65aaed26&is=65987826&hm=d3030029c1e818429d890220140f2a7d103630a18c3cb3be22bf82f43dafb49f&",
+            "duration": 19.8
+        },
+        "train5": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946775967940669/temp.gif?ex=65aaed43&is=65987843&hm=46a1e2eb09bd14dd0fe82f3e2ba24e644fa08125015c63cfda982e4a0d0d5674&",
+            "duration": 21.4
+        },
+        "static": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946782792073316/static.png?ex=65aaed44&is=65987844&hm=93755675091c5e22b698dbeda4db1b53bf94f3d0b51805d7120d1fd7c225db84&",
+            "duration": 0
+        },
+        "solo": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946801477697596/temp.gif?ex=65aaed49&is=65987849&hm=639c6e2461f3ac8fe70e47bf4c9c7c4f4943b081804afd58ac11797cd4b996ee&",
+            "duration": 1.52
+        }
+    },
+    "5star": {
+        "train3": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192946907413221496/temp.gif?ex=65aaed62&is=65987862&hm=05f3603bca669b6d4fd397818bea0feeb58e2b6f68dcb0750cfc77b0983f8496&",
+            "duration": 18.88
+        },
+        "train4": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192947020768485406/temp.gif?ex=65aaed7d&is=6598787d&hm=194c8f91c6cd8105ed77f564ef193edd37046961d8df1b40a40ad7ce31de04b8&",
+            "duration": 20.32
+        },
+        "train5": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192947144768880792/temp.gif?ex=65aaed9b&is=6598789b&hm=8ab55e861415d3eb31cccd1295cc212b712e5a2da1fbf42cfa79bd3a2af947f1&",
+            "duration": 21.92
+        },
+        "static": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192947154193502348/static.png?ex=65aaed9d&is=6598789d&hm=2997f1d7f8a5416ba566faf0b49ba62948626b4d8fc214f869d42a7547c84fec&",
+            "duration": 0
+        },
+        "solo": {
+            "url": "https://media.discordapp.net/attachments/435078369852260353/1192947174439387226/temp.gif?ex=65aaeda2&is=659878a2&hm=df304ff0c295b8c07173d0e6bd6a2f727850a1e2ff3afd934fe4ddc6549e0fcc&",
+            "duration": 2.04
+        }
+    }
+}

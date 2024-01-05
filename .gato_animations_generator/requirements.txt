@@ -1,0 +1,5 @@
+python-dotenv
+requests
+numpy==1.20
+imageio>=2.25
+opencv-python
