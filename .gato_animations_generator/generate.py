@@ -44,7 +44,7 @@ def combine_gifs(size, *gifs: str, optimize=True):
     frames = np.vstack(frames)
     iio.imwrite("tempt.gif", frames, duration=40)
     if optimize:
-        os.system(f"{os.getenv('GIFSICLE', './gifsicle')} --lossy=50 -o temp.gif tempt.gif")
+        os.system(f"{os.getenv('GIFSICLE', './gifsicle')} --lossy=30 -o temp.gif tempt.gif")
         os.remove("tempt.gif")
     else:
         if os.path.exists("temp.gif"):
@@ -57,13 +57,13 @@ def combine_gifs(size, *gifs: str, optimize=True):
 res = {}
 
 for d in os.listdir("gifs"):
-    if not os.path.isdir(d):
+    if not os.path.isdir(os.path.join("gifs", d)):
         continue
 
     anim = {}
 
     print(d, "train3")
-    duration = combine_gifs((360, 640), "train3.gif", "transi.gif", os.path.join(d, "solo.gif"))
+    duration = combine_gifs((240, 426), "train3.gif", "transi.gif", os.path.join(d, "solo.gif"))
     url = discord_send_file("temp.gif")
     anim["train3"] = {
         "url": url,
@@ -71,7 +71,7 @@ for d in os.listdir("gifs"):
     }
 
     print(d, "train4")
-    duration = combine_gifs((360, 640), "train4.gif", "transi.gif", os.path.join(d, "solo.gif"))
+    duration = combine_gifs((240, 426), "train4.gif", "transi.gif", os.path.join(d, "solo.gif"))
     url = discord_send_file("temp.gif")
     anim["train4"] = {
         "url": url,
@@ -79,7 +79,7 @@ for d in os.listdir("gifs"):
     }
 
     print(d, "train5")
-    duration = combine_gifs((360, 640), "train5.gif", "transi.gif", os.path.join(d, "solo.gif"))
+    duration = combine_gifs((240, 426), "train5.gif", "transi.gif", os.path.join(d, "solo.gif"))
     url = discord_send_file("temp.gif")
     anim["train5"] = {
         "url": url,
@@ -87,7 +87,7 @@ for d in os.listdir("gifs"):
     }
 
     print(d, "static")
-    make_static((360, 640), os.path.join(d, "solo.gif"))
+    make_static((240, 426), os.path.join(d, "solo.gif"))
     url = discord_send_file(os.path.join("gifs", d, "static.png"))
     anim["static"] = {
         "url": url,
@@ -95,7 +95,7 @@ for d in os.listdir("gifs"):
     }
 
     print(d, "solo")
-    duration = combine_gifs((360, 640), os.path.join(d, "solo.gif"), optimize=False)
+    duration = combine_gifs((240, 426), os.path.join(d, "solo.gif"), optimize=False)
     url = discord_send_file("temp.gif")
     anim["solo"] = {
         "url": url,
