@@ -62,29 +62,14 @@ for d in os.listdir("gifs"):
 
     anim = {}
 
-    print(d, "train3")
-    duration = combine_gifs((240, 426), "train3.gif", "transi.gif", os.path.join(d, "solo.gif"))
-    url = discord_send_file("temp.gif")
-    anim["train3"] = {
-        "url": url,
-        "duration": duration
-    }
-
-    print(d, "train4")
-    duration = combine_gifs((240, 426), "train4.gif", "transi.gif", os.path.join(d, "solo.gif"))
-    url = discord_send_file("temp.gif")
-    anim["train4"] = {
-        "url": url,
-        "duration": duration
-    }
-
-    print(d, "train5")
-    duration = combine_gifs((240, 426), "train5.gif", "transi.gif", os.path.join(d, "solo.gif"))
-    url = discord_send_file("temp.gif")
-    anim["train5"] = {
-        "url": url,
-        "duration": duration
-    }
+    for train in ["train3", "train4", "train5", "train6"]:
+        print(d, train)
+        duration = combine_gifs((240, 426), train, "transi.gif", os.path.join(d, "solo.gif"))
+        url = discord_send_file("temp.gif")
+        anim[train] = {
+            "url": url,
+            "duration": duration
+        }
 
     print(d, "static")
     make_static((240, 426), os.path.join(d, "solo.gif"))
