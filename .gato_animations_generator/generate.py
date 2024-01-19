@@ -55,6 +55,9 @@ def combine_gifs(size, *gifs: str, optimize=True):
 
 
 res = {}
+if os.path.exists("animations.json"):
+    with open("animations.json", "r") as f:
+        res = json.load(f)
 
 for d in os.listdir("gifs"):
     if not os.path.isdir(os.path.join("gifs", d)):
@@ -66,7 +69,7 @@ for d in os.listdir("gifs"):
         print(d, train)
         duration = combine_gifs((240, 426), train, "transi.gif", os.path.join(d, "solo.gif"))
         url = discord_send_file("temp.gif")
-        anim[train.spli(".")[0]] = {
+        anim[train.split(".")[0]] = {
             "url": url,
             "duration": duration
         }
