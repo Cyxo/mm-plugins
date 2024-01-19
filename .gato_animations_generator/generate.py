@@ -62,7 +62,7 @@ for d in os.listdir("gifs"):
 
     anim = {}
 
-    for train in ["train3", "train4", "train5", "train6"]:
+    for train in ["train3.gif", "train4.gif", "train5.gif", "train6.gif"]:
         print(d, train)
         duration = combine_gifs((240, 426), train, "transi.gif", os.path.join(d, "solo.gif"))
         url = discord_send_file("temp.gif")
