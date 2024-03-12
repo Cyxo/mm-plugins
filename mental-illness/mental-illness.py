@@ -4,7 +4,7 @@ import io
 import json
 import os
 import random
-import shutil
+import re
 import uuid
 from typing import Optional
 
@@ -55,6 +55,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
     def generate_message(self):
         words = [random.choice(list(self.words.keys()))]
         while words[-1] != "\n" or len(words) < 20:
+            print(words)
             total = sum(self.words[words[-1]].values())
             probas = {}
             last = 0
@@ -100,11 +101,11 @@ class MentalIllness(commands.Cog, name=COG_NAME):
         if message.channel.id in CHANNEL_IDS:
             self.msg_counter += 1
 
-            words = message.content.split(" ") + ["\n"]
+            words = re.split(r"\s+", message.content.lower(), flags=re.MULTILINE) + ["\n"]
 
             for i in range(len(words) - 1):
-                word = words[i].lower()
-                nxt = words[i+1].lower()
+                word = words[i]
+                nxt = words[i+1]
 
                 if word not in self.words:
                     self.words[word] = {}
