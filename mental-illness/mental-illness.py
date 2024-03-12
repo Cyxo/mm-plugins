@@ -103,8 +103,8 @@ class MentalIllness(commands.Cog, name=COG_NAME):
             words = message.content.split(" ") + ["\n"]
 
             for i in range(len(words) - 1):
-                word = words[i]
-                nxt = words[i+1]
+                word = words[i].lower()
+                nxt = words[i+1].lower()
 
                 if word not in self.words:
                     self.words[word] = {}
