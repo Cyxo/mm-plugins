@@ -63,6 +63,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
                 last += v
 
             rnd = random.random()
+            print(probas, rnd)
             for w in probas:
                 if probas[w] > rnd:
                     words.append(w)
