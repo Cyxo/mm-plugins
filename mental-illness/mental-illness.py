@@ -53,7 +53,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
         self.footer = ""  # TODO: added just in case we do something with it someday
 
     def generate_message(self):
-        words = [random.choice(self.words)]
+        words = [random.choice(list(self.words.keys()))]
         while words[-1] != "\n" or len(words) < 20:
             total = sum(self.words[words[-1]].values())
             probas = {}
