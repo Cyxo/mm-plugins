@@ -114,12 +114,11 @@ class MentalIllness(commands.Cog, name=COG_NAME):
                 else:
                     self.words[word][nxt] += 1
 
-        if self.msg_counter == 10 or self.bot.user.mentioned_in(message) \
-        or (message.reference and message.reference.resolved.author.id == self.bot.user.id):
-            await message.channel.send(self.generate_message())
-
-        if self.msg_counter == 10:
+        if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved.author.id == self.bot.user.id):
+            await message.reply(self.generate_message(), mention_author=False)
+        elif self.msg_counter >= 10:
             self.msg_counter = 0
+            await message.channel.send(self.generate_message())
 
 
 
