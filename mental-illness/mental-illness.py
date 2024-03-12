@@ -54,8 +54,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
 
     def generate_message(self):
         words = [random.choice(list(self.words.keys()))]
-        while words[-1] != "\n" or len(words) < 20:
-            print(words)
+        while words[-1] != "\n" and len(words) < 20:
             total = sum(self.words[words[-1]].values())
             probas = {}
             last = 0
