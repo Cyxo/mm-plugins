@@ -450,6 +450,7 @@ class GatoGame(commands.GroupCog, name=COG_NAME, group_name="critter"):
         lines = []
 
         for gato in team:
+            print(gato._events)
             lines += gato.handle_events(plyr, CURRENCY_EMOJI)
 
         return "\n".join(lines)
@@ -717,6 +718,7 @@ class GatoGame(commands.GroupCog, name=COG_NAME, group_name="critter"):
             c, o = gato.claim()
             currency += c
             objects += o
+            print(c, o, events)
 
         if len(events) == 0:
             events = "*Nothing specific happened.*"
