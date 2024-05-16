@@ -382,7 +382,7 @@ class QOTDs(commands.Cog, name=COG_NAME):
             else:
                 question = self.questions[idx]
 
-                description = f"Here is the command used:\n\n```?qotd add \"{question['title']}\" {' '.join([chr(34) + option + chr(34) for option in question['options']])}```"
+                description = f"Here is the command used:\n\n```?qotd edit {number} \"{question['title']}\" {' '.join([chr(34) + option + chr(34) for option in question['options']])}```"
                 emote = ""
                 colour = discord.Colour.dark_green()
         else:

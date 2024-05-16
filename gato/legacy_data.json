@@ -1,0 +1,92 @@
+{
+    "items": {
+        "mrrole": {
+            "name": "Mei's Ruan Role",
+            "description": "The must-have role for real Ruan Mei mains!",
+            "image": "https://i.ibb.co/f2C6JKG/ruan.png",
+            "effects": {
+                "give_role": [1183807105682120774]
+            }
+        },
+        "pbprole": {
+            "name": "Pastry Role",
+            "description": "Tasty~",
+            "image": "https://i.ibb.co/gSSctvX/000.png",
+            "effects": {
+                "give_role": [1179765215215235102]
+            }
+        },
+        "ferole": {
+            "name": "Embroidery Role",
+            "description": "Become a trendsetter with this super fashionable role!",
+            "image": "https://i.ibb.co/KxR4c1j/embroiderie.png",
+            "effects": {
+                "give_role": [1183807831154110564]
+            }
+        },
+        "adenine": {
+            "name": "Adenine",
+            "description": "Collect all the DNA proteins for a special reward!",
+            "image": "https://i.ibb.co/M7P85KQ/adna.png",
+            "effects": {
+                "dna_role": [1183807797176049814]
+            }
+        },
+        "cytosine": {
+            "name": "Cytosine",
+            "description": "Collect all the DNA proteins for a special reward!",
+            "image": "https://i.ibb.co/y0FYrpK/adnc.png",
+            "effects": {
+                "dna_role": [1183807797176049814]
+            }
+        },
+        "guanine": {
+            "name": "Guanine",
+            "description": "Collect all the DNA proteins for a special reward!",
+            "image": "https://i.ibb.co/nkx34Mq/adng.png",
+            "effects": {
+                "dna_role": [1183807797176049814]
+            }
+        },
+        "thymine": {
+            "name": "Thymine",
+            "description": "Collect all the DNA proteins for a special reward!",
+            "image": "https://i.ibb.co/Fn3SSVt/adnt.png",
+            "effects": {
+                "dna_role": [1183807797176049814]
+            }
+        },
+        "currencyboost": {
+            "name": "Currency Boost",
+            "description": "Boosts currency earn. The more you have, the better!",
+            "image": "https://i.ibb.co/pzLxbVn/booster.png",
+            "effects": {
+                "currency_boost": []
+            }
+        },
+        "octoplush": {
+            "name": "Octo Plush",
+            "description": "Reversable octopus plushie. It's so cute when it changes its mood!",
+            "image": "https://i.ibb.co/cgG6YmD/octoplush.png"
+        }
+    },
+
+    "shops": [
+        {
+            "name": "Permanent Shop",
+            "to_buy": {
+                "pbprole": 20000,
+                "ferole": 40000,
+                "mrrole": 60000,
+                "adenine": 40000,
+                "cytosine": 40000,
+                "guanine": 40000,
+                "thymine": 40000,
+                "currencyboost": 10000,
+                "octoplush": 100000
+            },
+            "to_sell": {
+            }
+        }
+    ]
+}

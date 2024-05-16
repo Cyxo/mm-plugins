@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from functools import wraps
-from random import random, randint
+from random import random, randint, choice
+
+import discord
 
 from ABaseItem import ABaseItem, ItemType
 
@@ -14,6 +16,19 @@ def require_alive(function):
 
     return new_function
 
+def check_used_equip(function):
+    """Decorator that removes used up equipment from the gato."""
+    @wraps(function)
+    def new_function(gato: "ABaseGato", *args, **kwargs):
+        uu = []
+        for i, eq in enumerate(gato.equipments):
+            if eq.used_up:
+                uu.append(i)
+        if len(uu) > 0:
+            gato.equipments.pop(*uu)
+        return function(gato, *args, **kwargs)
+
+    return new_function
 
 
 class ABaseGato(ABaseItem):
@@ -22,10 +37,10 @@ class ABaseGato(ABaseItem):
     Attributes starting with a `_` should not be modified manually.
     Attributes in CAPS are constants."""
 
-    IMAGE: str = "https://cdn.discordapp.com/emojis/1173895764087414855.webp"
+    IMAGE: str = "https://i.ibb.co/9n5gT9D/download.png"
     """Sprite of the gato. **OVERRIDE IT!**"""
 
-    ANIMATIONS: str = "mooncake"
+    ANIMATIONS: str = "mooncakegato"
     """A reference to a key in `animations.json`. **OVERRIDE IT!**"""
 
     DISPLAY_NAME: str = "Base Gato"
@@ -56,14 +71,34 @@ class ABaseGato(ABaseItem):
         "health",
         "efficiency_boosts",
         "damage_reductions",
+        "hunger_reductions",
+        "mood_loss_reductions",
+        "energy_loss_reductions",
         "eidolon",
         "friendship",
-        "deployed_today"
+        "_time_deployed",
+        "claimed_today",
+        "fetched_currency",
+        "fetched_objects"
     ]
     """Attributes that will be saved when exporting the gato to JSON. *Can be overriden or completed with custom attributes.*"""
 
     ITEM_TYPE = ItemType.GATO
     """This is just because ABaseGato now extends ABaseItem. **DON'T OVERRIDE IT**, it would make no sense..."""
+
+    RANDOM_OBJECT_WEIGHTS = {
+        "TrashConsumable": 10,
+        "MedkitConsumable": 10,
+        "AvocadoToastConsumable": 10,
+        "CatTreatsConsumable": 10,
+        "SwedishFishConsumable": 10,
+        "DefibrilatorConsumable": 10,
+        "FeatherTeaserConsumable": 10,
+        "SalmonConsumable": 10,
+        "FakeMouseEq": 10,
+        "MedicalInsuranceTEq": 1
+    }
+    """Weight of each object when fetching a random object. *Can be overriden or completed with custom objects.*"""
 
 
     max_mood: float = 100.0
@@ -139,6 +174,15 @@ class ABaseGato(ABaseItem):
     eidolon: int
     """Eidolon level of the gato. Starts at 0, max 6."""
 
+    equipments: list[ABaseItem]
+    """List of equipments on this gato."""
+
+    fetched_currency: float
+    """Amount of currency fetched since last claim."""
+
+    fetched_objects: list[str]
+    """Objects fetched since last claim."""
+
 
     def __init__(self, **kwargs):
         self.mood = self.max_mood
@@ -149,9 +193,12 @@ class ABaseGato(ABaseItem):
 
         self.name = self.DISPLAY_NAME
         self.eidolon = 0
+        self.fetched_currency = 0
 
         # Initialize objects to new objects (not shared by the class)
         self._events = []
+        self.equipments = []
+        self.fetched_objects = []
         self.efficiency_boosts = {}
         self.damage_reductions = {}
         self.hunger_reductions = {}
@@ -170,13 +217,12 @@ class ABaseGato(ABaseItem):
         :return: A dict containing the gato's class name, and all the values specified in :py:attr:`VALUES_TO_SAVE`.
         :rtype: dict
         """
-        return {
-            "type": self.__class__.__name__,
-            "values": dict((val, getattr(self, val)) for val in self.VALUES_TO_SAVE)
-        }
+        dct = super().to_json()
+        dct["equipments"] = [eq.to_json() for eq in self.equipments]
+        return dct
 
     @classmethod
-    def from_json(cls, json: dict):
+    def from_json(cls, json: dict, items_helper = {}):
         """Class method to import a gato from JSON.
 
         :classmethod:
@@ -185,9 +231,38 @@ class ABaseGato(ABaseItem):
         :return: The imported gato
         :rtype: :py:class:`ABaseGato`
         """
-        return cls(**json["values"])
+        gato = cls(**json["values"])
+        for itm in json["equipments"]:
+            eq = items_helper[itm["type"]].from_json(itm)
+            gato.equipments.append(eq)
+        return gato
+
+    def get_gato_embed(self):
+        description = f"# {self.name}\n"
+        description += f"## {self.DISPLAY_NAME}\n"
+        description += f"{self.__doc__.format(eidolon=self.eidolon)}\n" + \
+            f"❤️ {round(self.health)} / {round(self.max_health)} │ " + \
+            f"🍗 {round(self.hunger)} / {round(self.max_hunger)} │ " + \
+            f"🌞 {round(self.mood)} / {round(self.max_mood)} │ " + \
+            f"⚡ {round(self.energy)} / {round(self.max_energy)}\n" + \
+            f"**Friendship:** {int(self.friendship)}/10\n" + \
+            f"\n✨ **Eidolon {self.eidolon}**\n\nEquipments:\n"
+
+        for eq in self.equipments:
+            description += f"- {eq.DISPLAY_NAME}\n"
+        if len(self.equipments) == 0:
+            description += "*No equipment*"
+
+        embed = discord.Embed(
+            title=self.name,
+            description=description,
+            colour=discord.Colour.teal()
+        )
+        embed.set_thumbnail(url=self.IMAGE)
+        return embed
 
 
+    @check_used_equip
     def deploy(self, team: list["ABaseGato"]):
         """Called when a gato is deployed."""
 
@@ -201,6 +276,10 @@ class ABaseGato(ABaseItem):
         if self.health > 0:
             self._fainted = False
 
+        for eq in self.equipments:
+                eq.deploy(self)
+
+    @check_used_equip
     def claim(self):
         """Called everytime the owner claims the rewards of this gato."""
         self._events = []
@@ -209,6 +288,17 @@ class ABaseGato(ABaseItem):
             self.friendship += 0.1
 
         self.claimed_today += 1
+
+        for eq in self.equipments:
+                eq.claim(self)
+        
+        objects = self.fetched_objects[:]
+        currency = self.fetched_currency
+
+        self.fetched_objects.clear()
+        self.fetched_currency = 0
+
+        return currency, objects
 
 
     def get_args_for_event(self, event_name: str, values: list) -> dict:
@@ -260,7 +350,7 @@ class ABaseGato(ABaseItem):
             args["currency"] = CURRENCY_EMOJI
 
             if et == "bitten":
-                player.transactions.currency -= args["amount"]
+                player.currency -= args["amount"]
 
             line += self.EVENT_DESCRIPTIONS[et].format(**args)
             lines.append(line)
@@ -300,12 +390,18 @@ class ABaseGato(ABaseItem):
         objects = []
         if self._time_deployed % 60 == 0 and self.efficiency >= 1:
             if random() < self.luck / 100:
-                objects.append("Shiny thing")
+                cumulative_items = []
+                for k, v in self.RANDOM_OBJECT_WEIGHTS.items():
+                    cumulative_items += [k]*v
+                obj = choice(cumulative_items)
+                objects.append(obj)
 
         return objects
 
 
     @abstractmethod
+    @check_used_equip
+    @require_alive
     def simulate(self, team: list["ABaseGato"], seconds: int = 1):
         """Runs a simulation of the gato.
         **Called pretty much every seconds.**
@@ -320,22 +416,23 @@ class ABaseGato(ABaseItem):
         :rtype: tuple[float, list[str]]
         """
 
-        if not self._fainted:
-            self._time_deployed += seconds
+        self._time_deployed += seconds
 
-            self.lose_stats_over_time(seconds)
+        self.lose_stats_over_time(seconds)
 
-            currency = self.compute_currency(seconds)
+        currency = self.compute_currency(seconds)
 
-            objects = self.random_object(seconds)
+        objects = self.random_object(seconds)
 
-            return currency, objects
-        else:
-            return 0.0, []
+        for eq in self.equipments:
+            eq.simulate(self, seconds)
+
+        self.fetched_currency += currency
+        self.fetched_objects += objects
 
 
     @require_alive
-    def add_health(self, amount: float):
+    def add_health(self, amount: float, allow_overflow: bool = False):
         """Affect a gato's health within its limits.
         Amount can be negative.
         Use this rather than modifying :py:attr:`health` directly.
@@ -348,11 +445,11 @@ class ABaseGato(ABaseItem):
         """
 
         if amount < 0:
-            amount /= 1 + sum(self.damage_reductions.values())
+            amount = amount * max(0, 1 - sum(self.damage_reductions.values()))
 
         self.health += amount
 
-        if self.health > self.max_health:
+        if self.health > self.max_health and not allow_overflow:
             self.health = self.max_health
         elif self.health <= 0.0:
             self.health = 0.0
@@ -361,7 +458,7 @@ class ABaseGato(ABaseItem):
 
 
     @require_alive
-    def add_mood(self, amount: float):
+    def add_mood(self, amount: float, allow_overflow: bool = False):
         """Affect a gato's mood within its limits.
         Amount can be negative.
         Use this rather than modifying :py:attr:`mood` directly.
@@ -373,18 +470,18 @@ class ABaseGato(ABaseItem):
         """
 
         if amount < 0:
-            amount /= 1 + sum(self.mood_loss_reductions.values())
+            amount = amount * max(0, 1 - sum(self.mood_loss_reductions.values()))
 
         self.mood += amount
 
-        if self.mood > self.max_mood:
+        if self.mood > self.max_mood and not allow_overflow:
             self.mood = self.max_mood
         elif self.mood <= 0.0:
             self.mood = 0.0
 
 
     @require_alive
-    def add_hunger(self, amount: float):
+    def add_hunger(self, amount: float, allow_overflow: bool = False):
         """Affect a gato's hunger within its limits.
         Amount can be negative.
         Use this rather than modifying :py:attr:`hunger` directly.
@@ -396,18 +493,18 @@ class ABaseGato(ABaseItem):
         """
 
         if amount < 0:
-            amount /= 1 + sum(self.hunger_reductions.values())
+            amount = amount * max(0, 1 - sum(self.hunger_reductions.values()))
 
         self.hunger += amount
 
-        if self.hunger > self.max_hunger:
+        if self.hunger > self.max_hunger and not allow_overflow:
             self.hunger = self.max_hunger
         elif self.hunger <= 0.0:
             self.hunger = 0.0
 
 
     @require_alive
-    def add_energy(self, amount: float):
+    def add_energy(self, amount: float, allow_overflow: bool = False):
         """Affect a gato's energy within its limits.
         Amount can be negative.
         Use this rather than modifying :py:attr:`energy` directly.
@@ -419,11 +516,25 @@ class ABaseGato(ABaseItem):
         """
 
         if amount < 0:
-            amount /= 1 + sum(self.energy_loss_reductions.values())
+            amount = amount * max(0, 1 - sum(self.energy_loss_reductions.values()))
 
         self.energy += amount
 
-        if self.energy > self.max_energy:
+        if self.energy > self.max_energy and not allow_overflow:
             self.energy = self.max_energy
         elif self.energy <= 0.0:
             self.energy = 0.0
+
+
+    def set_eidolon(self, value: int):
+        """Setter for a gato's eidolon value.
+        Value must be an integer between 0 and 6 (inclusive).
+        Use this rather than modifying :py:attr:`eidolon` directly.
+        *Can be overriden.* 
+
+        :param amount: New eidolon value to set.
+        :type amount: int
+        """
+        
+        # clamp value to [0, 6]
+        self.eidolon = max(min(value, 6), 0)

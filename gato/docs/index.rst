@@ -23,3 +23,31 @@ Class
    :members:
    :private-members:
    :member-order: bysource
+
+
+AEquipment
+~~~~~~~~~~~
+
+.. attributetable:: AEquipment.AEquipment
+
+Class
+"""""
+
+.. autoclass:: AEquipment.AEquipment
+   :members:
+   :private-members:
+   :member-order: bysource
+
+
+AConsumable
+~~~~~~~~~~~
+
+.. attributetable:: AConsumable.AConsumable
+
+Class
+"""""
+
+.. autoclass:: AConsumable.AConsumable
+   :members:
+   :private-members:
+   :member-order: bysource

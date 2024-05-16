@@ -10,14 +10,13 @@ class ExampleGato(ABaseGato):
     """
 
     # Override constants
-    IMAGE = "https://media.discordapp.net/attachments/435078369852260353/1192961669467488307/cyx_gato.png"
-    ANIMATIONS = "5star"
+    IMAGE = "https://i.ibb.co/55BygxL/cyx-gato.png"
+    ANIMATIONS = "cyxgato"
     DISPLAY_NAME = "Crème Brûlée"
     RARITY = 5
     VALUES_TO_SAVE = ABaseGato.VALUES_TO_SAVE + [
         "buff_duration",
         "buff_cooldown",
-        "has_buff",
         "find_object_cooldown"
     ]
 
@@ -34,23 +33,24 @@ class ExampleGato(ABaseGato):
     @require_alive
     def efficiency_buff(self, seconds):
         # Update buff duration and cooldown
-        self.buff_duration -= seconds
-        self.buff_cooldown -= seconds
+        if self.buff_duration > 0:
+            self.buff_duration = max(self.buff_duration - seconds, 0)
+        if self.buff_cooldown > 0:
+            self.buff_cooldown = max(self.buff_cooldown - seconds, 0)
+
+        # Remove boost and return if duration ran out and still in cooldown
+        if self.buff_duration <= 0 and self.buff_cooldown > 0:
+            self.efficiency_boosts.pop(self.BUFF_KEY, None)
+            return
 
         # Apply buff if cooldown is over
-        if self.buff_cooldown <= 0 or self.buff_duration > 0:
-            # Increase efficiency boost
-            self.efficiency_boosts[self.BUFF_KEY] = 20/100 + (2/100 * self.eidolon)
-
+        if self.buff_cooldown <= 0:
             # Set base cooldown and duration
-            self.buff_duration += 20*60
-            self.buff_cooldown += 60*60
-            self.has_buff = True
+            self.buff_duration = 20*60
+            self.buff_cooldown = 60*60
 
-        # Remove buff if duration is over
-        if self.buff_duration <= 0 and self.has_buff:
-            self.efficiency_boosts.pop(self.BUFF_KEY)
-            self.has_buff = False
+        # Apply efficiency boost
+        self.efficiency_boosts[self.BUFF_KEY] = 20/100 + (2/100 * self.eidolon)
 
 
     def random_object(self, seconds):
@@ -73,7 +73,7 @@ class ExampleGato(ABaseGato):
             # Randomly find an Rare treasure
             if random() < self.luck*chances:
                 # If we found one, add it to the objects found by the superclass method
-                objects.append("Rare treasure")
+                objects.append("MedicalInsuranceTEq")
 
         # Return found objects
         return objects
@@ -84,7 +84,4 @@ class ExampleGato(ABaseGato):
         self.efficiency_buff(seconds)
 
         # Then call the parent simulation (VERY IMPORTANT)
-        currency, objects = super().simulate(seconds)
-
-        # Return gathered currency and objects
-        return currency, objects
+        super().simulate(team, seconds)
