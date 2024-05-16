@@ -42,7 +42,7 @@ def combine_gifs(size, *gifs: str, optimize=True):
             frames[g] = res
 
     frames = np.vstack(frames)
-    iio.imwrite("tempt.gif", frames, duration=40)
+    iio.imwrite("tempt.gif", frames, duration=33)
     if optimize:
         os.system(f"{os.getenv('GIFSICLE', './gifsicle')} --lossy=30 -o temp.gif tempt.gif")
         os.remove("tempt.gif")
@@ -51,7 +51,7 @@ def combine_gifs(size, *gifs: str, optimize=True):
             os.remove("temp.gif")
         os.rename("tempt.gif", "temp.gif")
 
-    return frames.shape[0] * 40 / 1000
+    return frames.shape[0] * 33 / 1000
 
 
 res = {}
