@@ -6,8 +6,8 @@ from AGatoConsumable import AGatoConsumable
 class CatTreatsConsumable(AGatoConsumable):
     """> Restores 30 hunger and 50 energy"""
 
-    # IMAGE: str = "UPLOAD IT TO IMGBB.COM"
-    # ANIMATIONS: str = "medkit"
+    IMAGE: str = "https://i.ibb.co/XsGLW67/tl.png"
+    ANIMATIONS: str = "cattreats"
     DISPLAY_NAME: str = "Cat treats"
     RARITY: int = 3
 

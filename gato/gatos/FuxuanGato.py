@@ -13,9 +13,9 @@ class FuxuanGato(ABaseGato):
         > E6: (health restored increases to 85% and cooldown decreases by 30 minutes)
     """
 
-    # TODO: name & animation
+    # TODO: display name
     IMAGE = "https://i.ibb.co/8bThsz0/fuxuangato.png"
-    # ANIMATIONS = "fuxuangato"
+    ANIMATIONS = "fuxuangato"
     DISPLAY_NAME = "Fuxuan Gato"
     RARITY = 4
     VALUES_TO_SAVE = ABaseGato.VALUES_TO_SAVE + [

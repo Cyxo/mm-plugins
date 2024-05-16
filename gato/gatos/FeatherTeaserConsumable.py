@@ -6,8 +6,8 @@ from AGatoConsumable import AGatoConsumable
 class FeatherTeaserConsumable(AGatoConsumable):
     """> Play with the critter to increase its mood by 50"""
 
-    # IMAGE: str = "UPLOAD IT TO IMGBB.COM"
-    # ANIMATIONS: str = "medkit"
+    IMAGE: str = "https://i.ibb.co/HdbHftQ/tl.png"
+    ANIMATIONS: str = "featherteaser"
     DISPLAY_NAME: str = "Feather teaser"
     RARITY: int = 3
 

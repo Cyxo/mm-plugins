@@ -14,7 +14,7 @@ class ArgentiGato(ABaseGato):
 
     # Override constants
     IMAGE = "https://i.ibb.co/8cfy5W5/argenti-gato.png"
-    # ANIMATIONS = "4star"
+    ANIMATIONS = "argentigato"
     DISPLAY_NAME = "Creme de Rose"
     RARITY = 4
     VALUES_TO_SAVE = ABaseGato.VALUES_TO_SAVE + [

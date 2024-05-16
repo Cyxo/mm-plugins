@@ -9,7 +9,7 @@ class SwedishFishConsumable(AGatoConsumable):
     """> Restores 30 hunger and increases efficiency by 10% for 1 hour. ⚠️ Efficiency food buffs don't stack!"""
 
     IMAGE: str = "https://i.ibb.co/McD71pV/image0.png"
-    # ANIMATIONS: str = "medkit"
+    ANIMATIONS: str = "swedishfish"
     DISPLAY_NAME: str = "Swedish Fish"
     RARITY: int = 3
 

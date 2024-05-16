@@ -9,9 +9,9 @@ class KafkaGato(ABaseGato):
         > E6: (increases time to 22 minutes).
     """
 
-    # TODO: image & animation
+    # TODO: image & update animation
     IMAGE = "https://i.ibb.co/zr82fFH/nuxiom-gato.png"
-    # ANIMATIONS = "kafkagato"
+    ANIMATIONS = "kafkagato"
     DISPLAY_NAME = "Shader Cat"
     RARITY = 4
     VALUES_TO_SAVE: list[str] = ABaseGato.VALUES_TO_SAVE + [

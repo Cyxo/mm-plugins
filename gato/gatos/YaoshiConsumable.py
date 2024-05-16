@@ -7,8 +7,8 @@ from AGatoConsumable import AGatoConsumable
 class YaoshiConsumable(AGatoConsumable):
     """> Replenish your critter's stats"""
 
-    # IMAGE: str = "UPLOAD IT TO IMGBB.COM"
-    # ANIMATIONS: str = "medkit"
+    IMAGE: str = "https://i.ibb.co/RjWM61G/tl.png"
+    ANIMATIONS: str = "yaoshisapple"
     DISPLAY_NAME: str = "Yaoshi's Apple"
     RARITY: int = 6
 

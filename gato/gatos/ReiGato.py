@@ -23,8 +23,7 @@ class ReiGato(ABaseGato):
         > E6: Gain additional {E6_ADDITIONAL_ALLIES_BUFF_AMOUNT} energy and mood upon deployment.
     """
 
-    # TODO: name & animation
-    IMAGE = "https://cdn.discordapp.com/attachments/1198010808672723075/1203291115005153330/reigato.png"
+    IMAGE = "https://i.ibb.co/rwqfkj1/image.png"
     ANIMATIONS = "reigato"
     DISPLAY_NAME = "Mint Chocolate Parfait"
     RARITY = 5

@@ -91,8 +91,7 @@ class RedPacketView(View):
 class RedPacketConsumable(AConsumable):
     """> Sends a Red Packet in the chat containing 1000 🌸. Up to 10 people can claim it!"""
 
-    # TODO: ask swede for the image and upload to imgbb.com
-    IMAGE: str = "https://i.ibb.co/9n5gT9D/download.png"
+    IMAGE: str = "https://i.ibb.co/QkCZhSV/tl.png"
     ANIMATIONS: str = "redpacket"
     DISPLAY_NAME: str = "Red Packet"
     RARITY: int = 3

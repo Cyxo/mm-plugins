@@ -14,7 +14,7 @@ class HimekoGato(ABaseGato):
 
     # Override constants
     IMAGE = "https://i.ibb.co/LCpWG4P/himeko-gato1.png"
-    # ANIMATIONS = "4star"
+    ANIMATIONS = "himekogato"
     DISPLAY_NAME = "Rose Tiramisu"
     RARITY = 4
     VALUES_TO_SAVE = ABaseGato.VALUES_TO_SAVE + [

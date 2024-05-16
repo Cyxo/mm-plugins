@@ -9,9 +9,9 @@ class BladeGato(ABaseGato):
         > E6: increase max hp by 20
     """
 
-    # TODO: img and animation
+    # TODO: img and update animation
     IMAGE: str = "https://i.ibb.co/zr82fFH/nuxiom-gato.png"
-    # ANIMATIONS: str = "bladegato"
+    ANIMATIONS: str = "bladegato"
     DISPLAY_NAME: str = "Sesame Cake"
     RARITY: int = 4
 

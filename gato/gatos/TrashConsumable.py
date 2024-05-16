@@ -6,8 +6,7 @@ from AGatoConsumable import AGatoConsumable
 class TrashConsumable(AGatoConsumable):
     """> Poison food. Reduces HP by 20, restores 50 hunger."""
 
-    # TODO: take the HSR trash image from some wiki and upload to imgbb.com
-    IMAGE: str = "https://i.ibb.co/9n5gT9D/download.png"
+    IMAGE: str = "https://i.ibb.co/7Rxqgzf/Item-Trash.png"
     ANIMATIONS: str = "trash"
     DISPLAY_NAME: str = "Trash"
     RARITY: int = 3

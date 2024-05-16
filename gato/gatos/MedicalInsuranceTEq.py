@@ -4,8 +4,10 @@ from ABaseItem import ItemType
 class MedicalInsuranceTEq(AEquipment):
     """> Upon claim, covers all expenses related to critter bites for the equipped team. Single use."""
 
+    IMAGE = "https://i.ibb.co/xhSvxV0/tl.png"
+    ANIMATIONS = "healthinsurance"
     ITEM_TYPE: ItemType = ItemType.TEAM_EQUIPMENT
-    DISPLAY_NAME = "Medical Insurance"
+    DISPLAY_NAME = "Health Insurance"
     RARITY = 4
 
     def claim(self, gato):

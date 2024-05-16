@@ -4,6 +4,8 @@ from ABaseItem import ItemType
 class FakeMouseEq(AEquipment):
     """> Boosts efficiency by 15% for 1 hour"""
 
+    IMAGE = "https://i.ibb.co/yhzsQyk/tl.png"
+    ANIMATIONS = "fakemouse"
     ITEM_TYPE: ItemType = ItemType.EQUIPMENT
     DISPLAY_NAME = "Fake mouse"
     VALUES_TO_SAVE = AEquipment.VALUES_TO_SAVE + [

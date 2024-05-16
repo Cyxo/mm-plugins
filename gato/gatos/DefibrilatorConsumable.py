@@ -7,8 +7,8 @@ from AGatoConsumable import AGatoConsumable
 class DefibrilatorConsumable(AGatoConsumable):
     """> Revives an undeployed critter with 20 HP"""
 
-    # IMAGE: str = "UPLOAD IT TO IMGBB.COM"
-    # ANIMATIONS: str = "medkit"
+    IMAGE: str = "https://i.ibb.co/hF2fPLP/tl.png"
+    ANIMATIONS: str = "defibrilator"
     DISPLAY_NAME: str = "Defibrilator"
     RARITY: int = 3
 

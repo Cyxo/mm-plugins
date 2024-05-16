@@ -15,7 +15,7 @@ class MakGato(ABaseGato):
 
     # Override constants
     IMAGE = "https://catjam-united.s-ul.eu/1I8uBOPF"
-    # ANIMATIONS = "mooncake"
+    ANIMATIONS = "makgato"
     DISPLAY_NAME = "Tropical Sunset"
     RARITY = 5
     

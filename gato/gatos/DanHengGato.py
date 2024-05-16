@@ -13,7 +13,7 @@ class DanHengGato(ABaseGato):
 
     # Override constants
     IMAGE = "https://i.ibb.co/KLzR779/danheng-gato.png"
-    # ANIMATIONS = "4star"
+    ANIMATIONS = "danhenggato"
     DISPLAY_NAME = "Rice Dumpling"
     RARITY = 4
 

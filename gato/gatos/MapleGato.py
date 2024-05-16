@@ -22,7 +22,7 @@ class MapleGato(ABaseGato):
         > e6: Efficiency boost lasts for an additional {TEAM_BUFF_ADDITIONAL_EFFICIENCY_BOOST_DURATION_E6} minutes.
     """
 
-    IMAGE = "https://cdn.discordapp.com/attachments/1198010808672723075/1208681228492865629/maplegato.png"
+    IMAGE = "https://i.ibb.co/hV4p92H/image.png"
     ANIMATIONS = "maplegato"
     DISPLAY_NAME = "Midnight Berry"
     RARITY = 5
