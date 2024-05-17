@@ -32,7 +32,7 @@ def make_static(size, gif):
 
 def combine_gifs(size, *gifs: str, optimize=True):
     paths = [os.path.join("gifs", gif) for gif in gifs]
-    frames = [iio.imread(path) for path in paths]
+    frames = [iio.imread(path, mode="RGB") for path in paths]
 
     for g, gif in enumerate(frames):
         if gif.shape[1:3] != size:
@@ -83,7 +83,7 @@ for d in os.listdir("gifs"):
     }
 
     print(d, "solo")
-    duration = combine_gifs((240, 426), os.path.join(d, "solo.gif"), optimize=False)
+    duration = combine_gifs((240, 426), os.path.join(d, "solo.gif"), optimize=True)
     url = discord_send_file("temp.gif")
     anim["solo"] = {
         "url": url,

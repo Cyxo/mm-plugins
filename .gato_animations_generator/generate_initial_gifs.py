@@ -85,7 +85,7 @@ for itm in ALL_ITEMS:
         overlay.paste(star, (202 + i*46, 498), star)
 
     for t in range(total_frames):
-        frame = Image.new("RGBA", (w, h), (0, 0, 0, 255))
+        frame = Image.new("RGB", (w, h), (0, 0, 0))
 
 
         frame.paste(background_frames[t])
