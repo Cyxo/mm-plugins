@@ -33,7 +33,8 @@ font = ImageFont.truetype("calibri.ttf", 36)
 bigfont = ImageFont.truetype("calibri.ttf", 64)
 total_frames = 37
 
-for itm in ALL_ITEMS:
+# for itm in ALL_ITEMS:
+for itm in [KafkaGato, GuinaifenGato, FuxuanGato, BladeGato, MedkitConsumable]:
     dest = "gifs/" + itm.ANIMATIONS
     if os.path.exists(dest):
         print("Folder", dest, "for", itm.DISPLAY_NAME, "already existed")
