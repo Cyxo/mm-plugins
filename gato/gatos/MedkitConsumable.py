@@ -6,10 +6,9 @@ from AGatoConsumable import AGatoConsumable
 class MedkitConsumable(AGatoConsumable):
     """> Restores 50 HP to the selected critter"""
 
-    # TODO: ask swede for the image and upload to imgbb.com
-    IMAGE: str = "https://i.ibb.co/9n5gT9D/download.png"
+    IMAGE: str = "https://i.ibb.co/3BTtqDg/Item-Healing-Spray.png"
     ANIMATIONS: str = "medkit"
-    DISPLAY_NAME: str = "Medkit"
+    DISPLAY_NAME: str = "Healing Spray"
     RARITY: int = 3
 
     async def modal_callback(self, value):

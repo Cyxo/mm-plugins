@@ -120,7 +120,8 @@ class Banner():
                 if len(itms) > 0:
                     text += f"- {r}⭐ items: **{itms}**\n"
 
-            text += "### 50/50\nEverytime you get a 4⭐ or 5⭐, there's a 50% chance to get an uprate item, and a 50% chance to get an offrate item.\n"
+            text += "### 50/50\nEverytime you get a 4⭐ or 5⭐, there's a 50% chance to get an uprate item, and a 50% chance to get an offrate item. "
+            text += "If the last rare item you got was an offrate item, the next one of the same rarity is guaranteed to be an uprate item.\n"
 
         text += "### Drop rates\n"
 
@@ -249,11 +250,12 @@ class Data:
     PERMANENT_FIVE_STARS = [
         MakGato
     ]
-    THREE_STARS = [i for i in ALL_ITEMS if i.RARITY == 3]
+    THREE_STARS = [i for i in GATOS+CONSUMABLES+EQUIPMENTS+TEAM_EQUIPMENTS if i.RARITY == 3]
+    FOUR_STAR_ITEMS = [i for i in CONSUMABLES+EQUIPMENTS+TEAM_EQUIPMENTS if i.RARITY == 4]
 
     banners = [
         Banner(
-            name="Lunar New Year Banner",
+            name="I Am Depreshaun",
             tag="limited",
             img="https://media.discordapp.net/attachments/1174877208377036884/1195010321820176525/critter_banner_mockups_2.png",
             colour=0x8ac7a4,
@@ -264,11 +266,11 @@ class Data:
                 5: 90
             },
             items=[
-                LNYGato,
+                ReiGato,
                 FuxuanGato,
                 QingqueGato
             ]+SIX_STAR_GATOS+THREE_STARS,
-            offrates=FOUR_STAR_GATOS+PERMANENT_FIVE_STARS,
+            offrates=FOUR_STAR_GATOS+FOUR_STAR_ITEMS+PERMANENT_FIVE_STARS,
             drop_weights={
                 6: 1,
                 5: 12,
@@ -286,7 +288,7 @@ class Data:
                 4: 10,
                 5: 90
             },
-            items=SIX_STAR_GATOS+PERMANENT_FIVE_STARS+FOUR_STAR_GATOS+THREE_STARS,
+            items=SIX_STAR_GATOS+PERMANENT_FIVE_STARS+FOUR_STAR_GATOS+FOUR_STAR_ITEMS+THREE_STARS,
             drop_weights={
                 6: 1,
                 5: 12,

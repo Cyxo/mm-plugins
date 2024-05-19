@@ -11,10 +11,9 @@ class GuinaifenGato(ABaseGato):
         > E6: increases mood/energy gained upon deployment to 25.
     """
 
-    # TODO: img & display name
-    IMAGE: str = "https://i.ibb.co/zr82fFH/nuxiom-gato.png"
+    IMAGE: str = "https://i.ibb.co/6sBX02z/guinaifen-gato.png"
     ANIMATIONS: str = "guinaifengato"
-    DISPLAY_NAME: str = "Guinaifen Gato"
+    DISPLAY_NAME: str = "Troublemaker"
     RARITY: int = 4
     VALUES_TO_SAVE = ABaseGato.VALUES_TO_SAVE + [
         "recent_stats_buff_ts"
