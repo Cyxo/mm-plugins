@@ -101,6 +101,8 @@ Item = ABaseItem.ABaseItem
 
 import AConsumable
 importlib.reload(AConsumable)
+import AGatoConsumable
+importlib.reload(AGatoConsumable)
 import ViewGato as ViewGato
 importlib.reload(ViewGato)
 

@@ -1,7 +1,7 @@
 import discord
 from discord.utils import find
 
-from AGatoConsumable import AGatoConsumable
+from AGatoConsumable import AGatoConsumable, check_requirements
 
 
 class YaoshiConsumable(AGatoConsumable):
@@ -12,7 +12,8 @@ class YaoshiConsumable(AGatoConsumable):
     DISPLAY_NAME: str = "Yaoshi's Apple"
     RARITY: int = 6
 
-    async def modal_callback(self, value):
+    @check_requirements
+    async def modal_callback(self, value, interaction):
         if value:
             gato = find(
                 lambda g: g.DISPLAY_NAME == value,
@@ -25,4 +26,4 @@ class YaoshiConsumable(AGatoConsumable):
             gato.add_mood(gato.max_mood)
             gato.add_energy(gato.max_energy)
 
-        await super().modal_callback(value)
+        await super().modal_callback(value, interaction)

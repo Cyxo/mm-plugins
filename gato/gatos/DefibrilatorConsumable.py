@@ -1,7 +1,7 @@
 import discord
 from discord.utils import find
 
-from AGatoConsumable import AGatoConsumable
+from AGatoConsumable import AGatoConsumable, check_requirements, check_requirements
 
 
 class DefibrilatorConsumable(AGatoConsumable):
@@ -12,12 +12,15 @@ class DefibrilatorConsumable(AGatoConsumable):
     DISPLAY_NAME: str = "Defibrilator"
     RARITY: int = 3
 
+    REQUIRE_ALIVE = False
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.ctx = None
         self.team = None
 
-    async def modal_callback(self, value):
+    @check_requirements
+    async def modal_callback(self, value, interaction):
         if value:
             gato = find(
                 lambda g: g.DISPLAY_NAME == value,
@@ -47,7 +50,7 @@ class DefibrilatorConsumable(AGatoConsumable):
             gato._fainted = False
             gato.add_health(20)
 
-        await super().modal_callback(value)
+        await super().modal_callback(value, interaction)
 
     async def consume(self, ctx, gatogame):
         player = gatogame.players[ctx.author.id]

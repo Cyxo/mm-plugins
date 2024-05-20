@@ -13,12 +13,12 @@ class ViewGato(View):
     @select(placeholder="Select a critter to use this on")
     async def gato(self, interaction: Interaction, select: Select):
         await interaction.response.defer()
-        await self.callback(select.values[0])
+        await self.callback(select.values[0], interaction)
 
     @button(style=discord.ButtonStyle.red, label="Cancel")
     async def cancel(self, interaction: Interaction, button: Button):
         await interaction.response.defer()
-        await self.callback(None)
+        await self.callback(None, interaction)
 
     def __init__(self, player, callback) -> None:
         super().__init__()
@@ -32,9 +32,9 @@ class ViewGato(View):
 
     async def on_error(self, interaction: discord.Interaction, error: Exception, item) -> None:
         await interaction.response.defer()
-        await self.callback(None)
+        await self.callback(None, interaction)
         traceback.print_exception(type(error), error, error.__traceback__)
 
     async def on_timeout(self) -> None:
-        await self.callback(None)
+        await self.callback(None, None)
 

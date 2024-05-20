@@ -1,6 +1,6 @@
 from discord.utils import find
 
-from AGatoConsumable import AGatoConsumable
+from AGatoConsumable import AGatoConsumable, check_requirements
 
 
 class TrashConsumable(AGatoConsumable):
@@ -11,7 +11,8 @@ class TrashConsumable(AGatoConsumable):
     DISPLAY_NAME: str = "Trash"
     RARITY: int = 3
 
-    async def modal_callback(self, value):
+    @check_requirements
+    async def modal_callback(self, value, interaction):
         if value:
             gato = find(
                 lambda g: g.DISPLAY_NAME == value,
@@ -20,4 +21,4 @@ class TrashConsumable(AGatoConsumable):
             gato.add_health(-20)
             gato.add_hunger(50)
 
-        await super().modal_callback(value)
+        await super().modal_callback(value, interaction)
