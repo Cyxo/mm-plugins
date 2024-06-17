@@ -14,6 +14,7 @@ import ReiGato
 import MapleGato
 import MakGato
 import KornGato
+import SkellyGato
 import ExampleGato, LNYGato
 import SeeleGato
 import QingqueGato
@@ -33,6 +34,7 @@ importlib.reload(ReiGato)
 importlib.reload(MapleGato)
 importlib.reload(MakGato)
 importlib.reload(KornGato)
+importlib.reload(SkellyGato)
 importlib.reload(LNYGato)
 importlib.reload(ExampleGato)
 importlib.reload(SeeleGato)
@@ -54,6 +56,7 @@ ReiGato = ReiGato.ReiGato
 MapleGato = MapleGato.MapleGato
 MakGato = MakGato.MakGato
 KornGato = KornGato.KornGato
+SkellyGato = SkellyGato.SkellyGato
 LNYGato = LNYGato.LNYGato
 ExampleGato = ExampleGato.ExampleGato
 SeeleGato = SeeleGato.SeeleGato
@@ -75,6 +78,7 @@ GATOS: list[Gato] = [
     MapleGato,
     MakGato,
     KornGato,
+    SkellyGato,
     LNYGato,
     ExampleGato,
     SeeleGato,

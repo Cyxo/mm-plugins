@@ -389,16 +389,20 @@ class ABaseGato(ABaseItem):
         return seconds * self.BASE_EARN_RATE * self.efficiency
 
 
+    def find_object(self):
+        cumulative_items = []
+        for k, v in self.RANDOM_OBJECT_WEIGHTS.items():
+            cumulative_items += [k]*v
+        obj = choice(cumulative_items)
+        return obj
+
+
     def random_object(self, seconds):
         """Computes random reward findings. Called by :py:meth:`simulate`. *Can be overriden.*"""
         objects = []
         if self._time_deployed % 60 == 0 and self.efficiency >= 1:
             if random() < self.luck / 100:
-                cumulative_items = []
-                for k, v in self.RANDOM_OBJECT_WEIGHTS.items():
-                    cumulative_items += [k]*v
-                obj = choice(cumulative_items)
-                objects.append(obj)
+                objects.append(self.find_object())
 
         return objects
 
