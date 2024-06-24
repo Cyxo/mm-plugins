@@ -80,13 +80,16 @@ class SkellyGato(ABaseGato):
         # Guaranteed to find a rare object
         self.fetched_objects += [self.find_object()]
 
+    def end_rush_hour(self):
+        if self.RUSH_HOUR_EFF_BUFF_KEY in self.efficiency_boosts:
+            self.efficiency_boosts.pop(self.RUSH_HOUR_EFF_BUFF_KEY)
+        self.luck = 1.0
+
 
     def deploy(self, team: list["ABaseGato"]):
         """Increase self hunger and energy on deploy"""
         if not self.rush_hour_active():
-            if self.RUSH_HOUR_EFF_BUFF_KEY in self.efficiency_boosts:
-                self.efficiency_boosts.pop(self.SKELLY_RUSH_HOUR_EVENT_TYPE)
-            self.luck = 1.0
+            self.end_rush_hour()
         if self.eidolon >= 6 and not self.rush_hour_on_cd():
             self.rush_hour()
 
@@ -112,8 +115,7 @@ class SkellyGato(ABaseGato):
     def simulate(self, team: list["ABaseGato"], seconds: int = 1):
         # Check for end of Rush Hour
         if self.RUSH_HOUR_EFF_BUFF_KEY in self.efficiency_boosts and not self.rush_hour_active():
-            self.efficiency_boosts.pop(self.SKELLY_RUSH_HOUR_EVENT_TYPE)
-            self.luck = 1.0
+            self.end_rush_hour()
 
         # Then call the parent simulation (VERY IMPORTANT)
         super().simulate(team, seconds)
