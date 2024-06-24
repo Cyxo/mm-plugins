@@ -17,7 +17,7 @@ def skelly_require_alive(function):
 
 class SkellyGato(ABaseGato):
     # Kit parameters
-    HP_ON_REVIVE: int = 40
+    HP_ON_REVIVE: int = 50
     RUSH_HOUR_DURATION_MINUTES: int = 20
     RUSH_HOUR_CD_MINUTES: int = 120
     RUSH_HOUR_STAT_RECOVERY: int = 30
