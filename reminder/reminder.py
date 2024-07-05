@@ -36,20 +36,19 @@ class Reminder(commands.Cog):
 
 
     async def send_reminder(self, rmc: ReminderCron):
-        try:
-            print("Preparing to send...")
-            if rmc in self.reminders:
-                print("Found in the list!")
-                ch = self.bot.get_channel(rmc.channel)
-                print("Channel: ", ch.name)
-                msg = await ch.fetch_message(rmc.initial_message)
-                print("Message: ", msg.content[:20], "...")
+        delay = rmc.dt - datetime.datetime.now().timestamp()
+        await asyncio.sleep(delay)
+        print("Preparing to send...")
+        if rmc in self.reminders:
+            print("Found in the list!")
+            ch = self.bot.get_channel(rmc.channel)
+            print("Channel: ", ch.name)
+            msg = await ch.fetch_message(rmc.initial_message)
+            print("Message: ", msg.content[:20], "...")
 
-                await msg.reply("Reminding you to do this!! <:yello:1147137527896092703>", mention_author=True)
-                self.reminders.remove(rmc)
-                print("Replied")
-        except Exception as e:
-            print(e)
+            await msg.reply("Reminding you to do this!! <:yello:1147137527896092703>", mention_author=True)
+            self.reminders.remove(rmc)
+            print("Replied")
 
 
     @commands.Cog.listener()
@@ -99,8 +98,7 @@ class Reminder(commands.Cog):
             self.reminders.append(rmc)
 
             print("Scheduling...")
-            self.bot.loop.call_at(dt.timestamp(), asyncio.create_task, self.send_reminder(rmc))
-            self.bot.loop.call_at(dt.timestamp(), print, "Should trigger now")
+            asyncio.ensure_future(self.send_reminder(rmc))
             print("Scheduled...")
 
 
