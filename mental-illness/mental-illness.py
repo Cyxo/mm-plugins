@@ -26,7 +26,7 @@ COG_NAME = "MentalIllness"
 DIR = os.path.dirname(__file__)
 SAVE_FILE = os.path.join(os.getcwd(), "mental-illness.json")
 
-CHANNEL_IDS = [1106791361157541898, 781551409433673748]
+CHANNEL_IDS = [1106791361157541898, 781551409433673748, 1338878244270899250]
 
 
 class MentalIllness(commands.Cog, name=COG_NAME):
@@ -95,7 +95,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        if message.author.bot:
+        if message.author.bot and not "from Herta Mains" in message.author.display_name:
             return
 
         if message.channel.id in CHANNEL_IDS:
