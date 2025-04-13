@@ -154,6 +154,9 @@ class ABaseGato(ABaseItem):
 
     energy_loss_reductions: dict[str, float] = {}
     """Reduces energy loss. The gato or other gatos can add things to it, with a unique key per gato."""
+    
+    bite_chance_reductions: dict[str, float] = {}
+    """Reduces bite chance. The gato or other gatos can add things to it, with a unique key per gato."""
 
     friendship: float = 1.0
     """Friendship stat, starts at 1, max 10."""
@@ -208,6 +211,7 @@ class ABaseGato(ABaseItem):
         self.hunger_reductions = {}
         self.mood_loss_reductions = {}
         self.energy_loss_reductions = {}
+        self.bite_chance_reductions = {}
 
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -276,6 +280,7 @@ class ABaseGato(ABaseItem):
         self.hunger_reductions = {}
         self.mood_loss_reductions = {}
         self.energy_loss_reductions = {}
+        self.bite_chance_reductions = {}
 
         if self.health > 0:
             self._fainted = False
@@ -374,7 +379,8 @@ class ABaseGato(ABaseItem):
             self.add_health(-0.02 * seconds)
 
         if self.mood < 10:
-            if random() < self.BITE_CHANCE / self.friendship:
+            bite_chance = self.BITE_CHANCE * max(0, 1 - sum(self.bite_chance_reductions.values()))
+            if random() < bite_chance / self.friendship:
                 self._events.append({"bitten": randint(2, 10)})
 
 
