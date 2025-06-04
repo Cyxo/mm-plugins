@@ -79,7 +79,7 @@ class Reminder(commands.Cog):
         if message.author.bot:
             return
 
-        if not "remind" in message.content.lower():
+        if not message.content.lower().startswith("reminder for me to") and not message.content.lower().startswith("remind me to"):
             return
 
         r = requests.get(
