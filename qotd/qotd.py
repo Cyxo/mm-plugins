@@ -195,7 +195,7 @@ class QOTDs(commands.Cog, name=COG_NAME):
         if react_channel is not None:
             description.append(f"*You can discuss in {react_channel.mention}*")
 
-        description.append("-# For your information, you can now [submit your own QOTD here](<https://docs.google.com/forms/d/e/1FAIpQLSdMS2T0OgZAUk68gthUoSasTORoTGpkJCinJDNuB0FFhkqmCA/viewform?usp=dialog>)! We can't wait to see your ideas!")
+        description.append("-# **You can now [submit your own QOTD here](<https://docs.google.com/forms/d/e/1FAIpQLSdMS2T0OgZAUk68gthUoSasTORoTGpkJCinJDNuB0FFhkqmCA/viewform?usp=dialog>)! We can't wait to see your ideas!**")
 
         embed = discord.Embed(
             title=question["title"],
