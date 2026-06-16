@@ -59,6 +59,8 @@ class MentalIllness(commands.Cog, name=COG_NAME):
             total = sum(self.words[words[-1]].values())
             probas = {}
             last = 0
+            if words[-1] not in self.words:
+                self.words[words[-1]] = {"\n": 1}
             for k, v in self.words[words[-1]].items():
                 probas[k] = (last + v) / total
                 last += v
