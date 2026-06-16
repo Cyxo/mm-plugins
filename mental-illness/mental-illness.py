@@ -5,6 +5,7 @@ import json
 import os
 import random
 import re
+import shutil
 import uuid
 from typing import Optional
 
@@ -73,13 +74,19 @@ class MentalIllness(commands.Cog, name=COG_NAME):
 
 
     def load_conf(self):
-        with open(SAVE_FILE, "r") as f:
-            self.save = json.load(f)
+        try:
+            with open(SAVE_FILE, "r") as f:
+                self.save = json.load(f)
+        except:
+            with open(SAVE_FILE + ".bak", "r") as f:
+                self.save = json.load(f)
 
 
     def save_conf(self):
+        j = json.dumps(self.save)
+        shutil.copy(SAVE_FILE, SAVE_FILE + ".bak")
         with open(SAVE_FILE, "w+") as f:
-            json.dump(self.save, f)
+            f.write(j)
 
 
     async def schedule_save(self):
