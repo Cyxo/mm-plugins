@@ -27,7 +27,7 @@ COG_NAME = "MentalIllness"
 DIR = os.path.dirname(__file__)
 SAVE_FILE = os.path.join(os.getcwd(), "mental-illness.json")
 
-CHANNEL_IDS = [1106791361157541898, 781551409433673748, 1338878244270899250]
+CHANNEL_IDS = [1106791361157541898, 781551409433673748, 1338878244270899250, 1106785083379171372]
 
 
 class MentalIllness(commands.Cog, name=COG_NAME):
@@ -126,7 +126,7 @@ class MentalIllness(commands.Cog, name=COG_NAME):
 
             if self.bot.user.mentioned_in(message) or (message.reference and message.reference.resolved.author.id == self.bot.user.id):
                 await message.reply(self.generate_message(), mention_author=False)
-            elif self.msg_counter >= 10:
+            elif self.msg_counter >= 15:
                 self.msg_counter = 0
                 await message.channel.send(self.generate_message())
 
