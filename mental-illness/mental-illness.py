@@ -56,6 +56,9 @@ class MentalIllness(commands.Cog, name=COG_NAME):
     def generate_message(self):
         words = [random.choice(list(self.words.keys()))]
         while words[-1] != "\n" and len(words) < 20:
+            if words[-1] not in self.words:
+                words.append("\n-# Ruan Mei didn't know how to end this sentence properly, you should teach her!")
+                break
             total = sum(self.words[words[-1]].values())
             probas = {}
             last = 0
