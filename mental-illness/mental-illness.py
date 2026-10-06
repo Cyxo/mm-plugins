@@ -113,11 +113,15 @@ class MentalIllness(commands.Cog, name=COG_NAME):
         if message.channel.id in CHANNEL_IDS:
             self.msg_counter += 1
 
-            words = re.split(r"\s+", message.content.lower(), flags=re.MULTILINE) + ["\n"]
+            words = re.split(r"\s+", message.content, flags=re.MULTILINE) + ["\n"]
 
             for i in range(len(words) - 1):
                 word = words[i]
+                if not word.lower().startswith("http"):
+                    word = word.lower()
                 nxt = words[i+1]
+                if not nxt.lower().startswith("http"):
+                    nxt = nxt.lower()
 
                 if word not in self.words:
                     self.words[word] = {}
